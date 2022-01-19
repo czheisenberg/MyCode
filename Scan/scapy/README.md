@@ -19,13 +19,13 @@ python3 ping.py -H 192.168.91.0/24
 - arpScan.py
 
 ```shell
-python3 arpScan.py --help
+sudo python3 arpScan.py --help
 ```
 
 ![](./img/arpscan1.png)
 
 ```shell
-sudo python3 arpScan.py -H 192.168.91.0/24
+sudo python3 arpScan.py -H 192.168.91.0/24 -i ens33
 ```
 
 ![](./img/arpscan2.png)

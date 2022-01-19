@@ -8,7 +8,7 @@ ip_mac_list = []
 
 def arpSingle(host):
     packet = Ether(dst="ff:ff:ff:ff:ff:ff")/ARP(pdst=host, hwdst="ff:ff:ff:ff:ff:ff")
-    ans,unans = srp(packet, timeout=1, iface="ens33",verbose=0)
+    ans,unans = srp(packet, timeout=1, verbose=0)
     #print(ans[0])
     for send,rcv in ans:
         ip_mac = rcv.sprintf("%ARP.psrc% --- %ARP.hwsrc%")
