@@ -1,4 +1,5 @@
 from scapy.all import *
+import sys
 import datetime
 import argparse
 import ipaddress
@@ -28,18 +29,21 @@ def arpScan(hosts,interface):
 
 def main():
     banner = r'''
-   _____                _________                     
-  /  _  \_____________ /   _____/ ____ _____    ____  
- /  /_\  \_  __ \____ \\_____  \_/ ___\\__  \  /    \ 
+   _____                _________
+  /  _  \_____________ /   _____/ ____ _____    ____
+ /  /_\  \_  __ \____ \\_____  \_/ ___\\__  \  /    \
 /    |    \  | \/  |_> >        \  \___ / __ \|   |  \
 \____|__  /__|  |   __/_______  /\___  >____  /___|  /
-        \/      |__|          \/     \/     \/     \/  .
+        \/      |__|          \/     \/     \/     \/  v1.0
     '''
     print(banner)
     parser = argparse.ArgumentParser()
     parser.add_argument("-H","--Host",type=str,help="Enter target IP, ex: 192.168.91.1 or 192.168.91.0/24.")
     parser.add_argument("-i","--iface",type=str,help="Select your network card, ex: ens33")
     args = parser.parse_args()
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit()
     hosts = args.Host
     iface = args.iface
     #print(hosts)

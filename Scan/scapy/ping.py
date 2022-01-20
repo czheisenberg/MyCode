@@ -1,4 +1,5 @@
 from scapy.all import *
+import sys
 import random
 import datetime
 import argparse
@@ -30,23 +31,26 @@ def pingScan(hosts):
         thread_list.append(t)
         t.start()
         # pingSingle(str(ip))
-    
+
     for threadlist in thread_list:
         threadlist.join()
 
 def main():
     banner = r'''
-           .__                
-______ |__| ____    ____  
-\____ \|  |/    \  / ___\ 
+           .__
+______ |__| ____    ____
+\____ \|  |/    \  / ___\
 |  |_> >  |   |  \/ /_/  >
-|   __/|__|___|  /\___  / 
-|__|           \//_____/  .
+|   __/|__|___|  /\___  /
+|__|           \//_____/  v1.0
     '''
     print(banner)
     parser = argparse.ArgumentParser()
     parser.add_argument("-H","--Host",type=str, help="Enter target IP ex: 192.168.91.138 or 192.168.91.0/24.")
     args = parser.parse_args()
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit()
     host = args.Host
     start_time = datetime.datetime.now()
     print(start_time)
@@ -63,4 +67,3 @@ ______ |__| ____    ____
 
 if __name__ == "__main__":
     main()
-

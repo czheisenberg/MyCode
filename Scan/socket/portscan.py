@@ -1,11 +1,4 @@
-'''
-Author: gakki_yyds
-Date: 2022-01-10 16:26:38
-LastEditors: gakki_yyds
-LastEditTime: 2022-01-11 14:41:49
-Description: socket 端口扫描
-FilePath: \端口扫描\portscan.py
-'''
+import sys
 import socket
 import argparse
 import datetime
@@ -25,16 +18,16 @@ def port_scan(host, port):
         # print("[-] {}:{} is close.".format(host,port))
         close.append(port)
     sock.close()
-   
+
 def main():
 
     banner = r'''
-    __________              __      _________                     
-\______   \____________/  |_   /   _____/ ____ _____    ____  
- |     ___/  _ \_  __ \   __\  \_____  \_/ ___\\__  \  /    \ 
+    __________              __      _________
+\______   \____________/  |_   /   _____/ ____ _____    ____
+ |     ___/  _ \_  __ \   __\  \_____  \_/ ___\\__  \  /    \
  |    |  (  <_> )  | \/|  |    /        \  \___ / __ \|   |  \
  |____|   \____/|__|   |__|   /_______  /\___  >____  /___|  /
-                                      \/     \/     \/     \/ 
+                                      \/     \/     \/     \/
     '''
     print(banner)
     parser = argparse.ArgumentParser()
@@ -42,6 +35,9 @@ def main():
     parser.add_argument("-p","--ports", type=str, default="1-1024" ,help="Target ports ex: 1-65535/default='1-1024'")
     parser.add_argument("-t","--thread", type=int, default=100, help="Number of threads ex: 100/default:100")
     args = parser.parse_args()
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit()
     host = args.host
     ports = args.ports
 
@@ -63,7 +59,7 @@ def main():
             t = threading.Thread(target=port_scan,args=(host,port)) # def sock_port(host,port)
             thread_list.append(t)
             t.start()
-    
+
     for threadlist in thread_list:
         threadlist.join()
 
@@ -73,7 +69,7 @@ def main():
         print("[+] {}:{} is open.".format(host,i))
     # print("\n")
     # for i in closed:
-    #     print("[-] {} {} is close.".format(host,i))    
+    #     print("[-] {} {} is close.".format(host,i))
     print("[*] All scans completed!")
     end_time = datetime.datetime.now()
     print(end_time)
