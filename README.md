@@ -26,6 +26,7 @@ git clone git@github.com:czheisenberg/MyCode.git
 - ./crypto/ImgBase64.py           python3 图片-base64互转。
 
 - ./ctfjb/  关于ctf的一些脚本
+- ./ctfjb/split urls/split-urls.py url分解
 
 ---
 
